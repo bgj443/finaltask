@@ -75,17 +75,6 @@ export default function Customerlist() {
     return (
         <div>
         <ReactTable filterable={true} data={customers} columns={columns} />
-        
-        <Button onClick={handleClick}>Open simple snackbar</Button>
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={open}
-          autoHideDuration={3000}//kesto vaihdettu 6000ms => 3000ms, mielestäni aika oli liian pitkä (ei muuta merkitystä)
-          onClose={handleClose}
-          message="Row deleted"/>
       </div>
     )
 }

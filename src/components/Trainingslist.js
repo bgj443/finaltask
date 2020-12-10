@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import moment from 'moment';
+import Moment from 'moment';
 
 
 export default function Traininglist() {
@@ -20,11 +20,6 @@ export default function Traininglist() {
             .then(data => setTrainings(data.content))       
     }
 
-    const fetchDate = () => {
-        fetch('https://customerrest.herokuapp.com/api/trainings')
-            .then(response => response.json())
-            .then(data => setTrainings(data.content.date))       
-    }
 
     //snackbar
     const [open, setOpen] = React.useState(false);
@@ -49,11 +44,11 @@ export default function Traininglist() {
   //Tietorivit treenien kaikille tiedoille
     const columns = [
 
-        {   
-            Header: 'Date',
-            accessor: 'date', 
-        },
-
+        {
+        Header: 'Date', accessor: 'date', sortable: true, filter: true,  
+        cellRendererFramework: params => (
+        <Moment format ="DD/MM/YYYY HH:mm">{params.date} </Moment>
+        )},
         {
             Header: 'Duration',
             accessor: 'duration'
