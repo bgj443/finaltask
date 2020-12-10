@@ -3,9 +3,8 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css"
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Moment from 'moment';
+import moment from 'moment';
+
 
 
 export default function Traininglist() {
@@ -17,7 +16,8 @@ export default function Traininglist() {
     const fetchData = () => {
         fetch('https://customerrest.herokuapp.com/api/trainings')
             .then(response => response.json())
-            .then(data => setTrainings(data.content))       
+            .then(data => setTrainings(data.content))
+            
     }
 
 
@@ -27,8 +27,6 @@ export default function Traininglist() {
         setOpen(true);
     };
     
-   
-
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -45,10 +43,16 @@ export default function Traininglist() {
     const columns = [
 
         {
-        Header: 'Date', accessor: 'date', sortable: true, filter: true,  
-        cellRendererFramework: params => (
-        <Moment format ="DD/MM/YYYY HH:mm">{params.date} </Moment>
-        )},
+            Header: 'Date',
+            accessor: 'date',
+            Cell: row => (
+                <span>
+                    {moment(row.value).format("D.M.YYYY - hh:mm")}
+                </span>
+            )
+        },
+      
+     
         {
             Header: 'Duration',
             accessor: 'duration'
