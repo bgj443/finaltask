@@ -16,8 +16,12 @@ export default function Traininglist() {
     const fetchTdata = () => {
         fetch('https://customerrest.herokuapp.com/gettrainings')
         .then(response => response.json())
-        .then(data => setTrainings(data.content))      
+        .then(data => setTrainings(data))      
     }
+
+ 
+
+
 //-haetaan tiedot herokussa olevasta tietokannasta api:n kautta-----------------
 //-snackbar---------------------------------------------------------------------
     const [open, setOpen] = React.useState(false);
@@ -83,15 +87,14 @@ const Deletetraining = (link) => {
             sortable: false,
             width: 150,
             accessor: 'id',
-            Cell: ({value}) => <Button color="secondary" variant="contained" size="small" onClick={() => this.Deletetraining(value)}>DELETE TRAINING</Button>
+            Cell: ({value}) => <Button color="secondary" variant="contained" size="small" onClick={() => Deletetraining(value)}>Delete</Button>
         }
-    ]
+    ] 
 //-Tietorivit treenien kaikille tiedoille---------------------------------
 
     return (
         <div>
         <ReactTable filterable={true} data={trainings} columns={columns}  />        
-        <Button onClick={handleClick}>Open simple snackbar</Button>
         <Snackbar
           anchorOrigin={{
             vertical: 'top',

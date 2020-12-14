@@ -5,7 +5,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import Addcustomer from './Addcustomer';
 import Editcustomer from './Editcustomer';
-
+import Addtraining from './Addtraining';
 
 
 export default function Customerlist() {
@@ -60,10 +60,9 @@ const AddCustomer = (newCustomer) => {
         },
         body: JSON.stringify(newCustomer)      
         })
-        .then(response => this.fetchData())
         .then(response => this.setState({open:true, message:'New customer saved to database'}))
-        .catch(err => console.error(err));
-        
+        .catch(err => console.error(err))
+        .then(res => fetchData());
 }
 
 
@@ -77,11 +76,23 @@ const editCustomer = (link, customer) => {
         },
         body: JSON.stringify(customer)      
         })
-        .then(response => this.setState({open:true, message:'Changes to customer are saved'}))
+        .then(response => this.setCustomers({open:true, message:'Changes to customer are saved'}))
         .catch(err => console.error(err))
         .then(res => fetchData());
 }
 //editCustomer funktio---------------------------------------------------------
+//add training funktio-----------------------------------------------------------
+const addTraining = (newTraining) => {
+    fetch("https://customerrest.herokuapp.com/api/trainings/", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newTraining)
+    })
+    .then(response => this.setTraining({open:true, message:'Changes to customer are saved'}))
+    .catch(err => console.error(err))
+    .then(res => fetchData());
+}
+//add training funktio-----------------------------------------------------------
 
 
   //Tietorivit auton tiedoille
@@ -123,7 +134,7 @@ const editCustomer = (link, customer) => {
             Header: "",
             filterable: false,
             sortable: false,
-            width: 90,
+            width: 75,
             accessor: "links.0.href", 
             Cell: ({value, row}) => (<Editcustomer editCustomer={editCustomer} customer={row} link={value} />)
         },
@@ -131,10 +142,18 @@ const editCustomer = (link, customer) => {
             Header: '',
             filterable: false,
             sortable: false,
-            width: 160,
+            width: 80,
             accessor: 'links.0.href',
             Cell: ({value}) => <Button color="secondary" variant="contained" size="small" onClick={() => Deletecustomer(value)}>Delete</Button>
-        }
+        },
+        {
+            Header: '',
+            filterable: false,
+            sortable: false,
+            width: 150,
+            accessor: 'links.0.href',
+            Cell: ({value, row}) => <Addtraining addTraining={addTraining}  customer={row} link={value}/>
+        },
     
             
     ]
@@ -143,7 +162,6 @@ const editCustomer = (link, customer) => {
         <div>
         <Addcustomer AddCustomer={AddCustomer} />   
         <ReactTable filterable={true} data={customers} columns={columns} />
-        <Button onClick={handleClick}>Open simple snackbar</Button>
         <Snackbar
           anchorOrigin={{
             vertical: 'top',
