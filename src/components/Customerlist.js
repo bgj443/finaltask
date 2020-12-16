@@ -155,7 +155,7 @@ const addTraining = (newTraining) => {
             Cell: ({value, row}) => <Addtraining addTraining={addTraining}  customer={row} link={value}/>
         },
     
-            
+        //variant="outlined" color="primary"
     ]
 
     return (

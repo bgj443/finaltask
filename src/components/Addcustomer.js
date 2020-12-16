@@ -34,10 +34,10 @@ export default function Editcustomer(props) {
     
   return (
     <div>          
-        <Button size="small" variant="contained" color="primary" onClick={handleClickOpen}>Add a new Customer</Button> 
+        <Button size="small" variant="outlined" color="primary" onClick={handleClickOpen}>Add a new Customer</Button> 
 
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Edit Customer</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add a new Customer</DialogTitle>
         <DialogContent>
           <TextField
               autoFocus

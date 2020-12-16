@@ -37,7 +37,7 @@ const [training, setTraining] = React.useState({
     
   return (
     <div>          
-        <Button size="small" variant="contained" color="primary" onClick={handleClickOpen}>Add Training</Button> 
+        <Button size="small" variant="outlined" color="primary" onClick={handleClickOpen}>Add Training</Button> 
 
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add training</DialogTitle>
